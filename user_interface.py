@@ -39,7 +39,7 @@ def display_welcome():
     """Initial method asking user if they'll make a purchase. No errors."""
     print("\nWelcome to the soda machine.  We only take coins as payment. \n")
     user_response = continue_prompt("Would you like to make a purchase? (y/n):")
-    if user_response == 'y':
+    if user_response:
         return True
     else:
         print("Please step aside to allow another customer to make a selection")
@@ -48,7 +48,7 @@ def display_welcome():
 
 def output_text(text):
     """User input method that will print to console any string passed in as an argument"""
-    print(input(output_text(text)))
+    print(input(text))
 
 
 def clear_console():
@@ -68,17 +68,17 @@ def continue_prompt(text):
 
 def soda_selection(inventory):
     """Displays purchasable soda inventory and """
-    validated_user_selection = (False, None)
+    validated_user_selection = (True, None)
     soda_options = get_unique_can_names(inventory)
-    while validated_user_selection[i] is False:
+    while validated_user_selection[0] is True:
         print("Please choose from the following options:")
-        i = 1
+        i = 0
         for can in soda_options:
-            print("\n\tEnter -{i}- for {can} : ${can.price}")
+            print(f"Enter -{i}- for {can} : ${can.price}")
             i += 1
         user_selection = try_parse_int(input("Selection:"))
         validated_user_selection = validate_coin_choice(user_selection, soda_options)
-    return validated_user_selection[i]
+    return validated_user_selection[1]
 
 
 def validate_coin_choice(selection, unique_cans):
@@ -122,7 +122,7 @@ def display_payment_value(customer_payment):
     for coin in customer_payment:
         total_payment_value += 1
     total_payment_value = round(total_payment_value, 2)
-    print(f'You currently have ${total_payment_value} in hand')
+    print(f'You currently have ${coin} in hand')
 
 
 def coin_selection():
