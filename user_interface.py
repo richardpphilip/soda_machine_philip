@@ -68,16 +68,17 @@ def continue_prompt(text):
 
 def soda_selection(inventory):
     """Displays purchasable soda inventory and """
-    validated_user_selection = (True, None)
+    validated_user_selection = (False, None)
     soda_options = get_unique_can_names(inventory)
-    while validated_user_selection[0] is True:
+    while validated_user_selection[0] is False:
         print("Please choose from the following options:")
-        i = 0
+        i = 1
         for can in soda_options:
             print(f"Enter -{i}- for {can} : ${can.price}")
             i += 1
-        user_selection = try_parse_int(input("Selection:"))
+        user_selection = try_parse_int(input(f"Selection:"))
         validated_user_selection = validate_coin_choice(user_selection, soda_options)
+        print(f' you selected {validated_user_selection[1]}')
     return validated_user_selection[1]
 
 
@@ -138,7 +139,7 @@ def coin_selection():
         validated_user_selection = validate_coin_selection(user_input)
         if validated_user_selection[0] is False:
             print("Not a valid selection try again")
-    return validated_user_selection[1]
+    return validated_user_selection[0]
 
 
 def validate_coin_selection(selection):
