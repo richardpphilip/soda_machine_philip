@@ -1,8 +1,6 @@
 import os
 
 
-
-
 def simulation_main_menu():
     """Main menu prompting user to choose an option"""
     validate_user_selection = (False, None)
@@ -30,18 +28,18 @@ def validate_main_menu(user_input):
 
 def display_customer_wallet_info(coins_list, total_value):
     """Takes in a list of ints to display number of coins along with total value of coins."""
-    print('You have {coins_list[0]} Quarters')
-    print('You have {coins_list[1]} Dimes')
-    print('You have {coins_list[2]} Nickels')
-    print('You have {coins_list[3]} Pennies')
-    print('Your wallet\'s total value is {total_value}')
+    print(f'You have {coins_list[0]} Quarters')
+    print(f'You have {coins_list[1]} Dimes')
+    print(f'You have {coins_list[2]} Nickels')
+    print(f'You have {coins_list[3]} Pennies')
+    print(f'Your wallet\'s total value is {total_value}')
 
 
 def display_welcome():
     """Initial method asking user if they'll make a purchase. No errors."""
     print("\nWelcome to the soda machine.  We only take coins as payment. \n")
     user_response = continue_prompt("Would you like to make a purchase? (y/n):")
-    if user_response:
+    if user_response == 'y':
         return True
     else:
         print("Please step aside to allow another customer to make a selection")
@@ -50,7 +48,7 @@ def display_welcome():
 
 def output_text(text):
     """User input method that will print to console any string passed in as an argument"""
-    print("text")
+    print(input(output_text(text)))
 
 
 def clear_console():
@@ -72,15 +70,15 @@ def soda_selection(inventory):
     """Displays purchasable soda inventory and """
     validated_user_selection = (False, None)
     soda_options = get_unique_can_names(inventory)
-    while validated_user_selection[0] is False:
+    while validated_user_selection[i] is False:
         print("Please choose from the following options:")
         i = 1
         for can in soda_options:
             print("\n\tEnter -{i}- for {can} : ${can.price}")
-            i = +1
+            i += 1
         user_selection = try_parse_int(input("Selection:"))
         validated_user_selection = validate_coin_choice(user_selection, soda_options)
-    return validated_user_selection[1]
+    return validated_user_selection[i]
 
 
 def validate_coin_choice(selection, unique_cans):
