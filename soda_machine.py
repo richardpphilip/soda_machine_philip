@@ -10,6 +10,7 @@ class SodaMachine:
         self.fill_inventory()
         self.fill_register()
 
+
     def fill_register(self):
         """Method will fill SodaMachine's register with certain amounts of each coin when called."""
         for index in range(8):
@@ -42,7 +43,7 @@ class SodaMachine:
 
         selected_soda = self.get_inventory_soda(selected_soda_name)
 
-        customer_payment = customer.gather_coins_from_wallet(selected_soda_name)
+        customer_payment = customer.gather_coins_from_wallet(selected_soda)
 
         self.calculate_transaction(customer_payment, selected_soda_name, customer)
 
@@ -125,7 +126,7 @@ class SodaMachine:
     def get_inventory_soda(self, selected_soda_name):
         """Returns the first instance of a can whose name matches the selected_soda_name parameter"""
         for can in self.inventory:
-            if can == selected_soda_name:
+            if can.name == selected_soda_name:
                 self.inventory.remove(can)
                 return can
         return None
