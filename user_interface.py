@@ -157,8 +157,8 @@ def validate_coin_selection(user_input):
     return switcher.get(user_input, (False, None))
 
 
-def end_message(soda_name, change_amount):
+def end_message(selected_soda, change_amount):
     """Closing message displaying name of soda purchased and amount of change returned"""
-    print(f'Enjoy your {soda_name}')
+    print(f'Enjoy your {selected_soda}')
     if change_amount >= 0:
         print(f'Dispensing ${change_amount}')
